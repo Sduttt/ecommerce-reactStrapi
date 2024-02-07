@@ -1,6 +1,14 @@
+import { useParams } from "react-router-dom"
 import { Card } from "../../components"
+import useFetch from "../../hooks/useFetch"
 
 const Products = () => {
+  const catId = useParams().id
+  // console.log(catId)
+
+  const { data, loading, error } = useFetch(`/categories?[filters][id][$eq]=${catId}`)
+
+
   return (
     <div className="flex justify-between gap-6 ">
       {/* LEFT */}
@@ -41,9 +49,12 @@ const Products = () => {
 
       {/* RIGHT */}
       <div className="w-[82%]" >
-        <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="cover" className="w-[80vw] h-[40vh] object-cover" />
+        <div className="relative">
+          <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="cover" className="w-[80vw] h-[40vh] object-cover" />
+          <h1 className="absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] text-accent text-3xl font-semibold capitalize">{error ? "" : (loading ? " " : data[0]?.attributes.title)}</h1>
+        </div>
         <div className="my-2 flex flex-wrap">
-          <Card  title="Sapiens" desc="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis architecto quia et!" pricex={399} price={349} img= "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" />
+          <Card title="Sapiens" desc="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis architecto quia et!" pricex={399} price={349} img="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" />
           <Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card />
         </div>
       </div>

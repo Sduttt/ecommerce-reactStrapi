@@ -1,9 +1,8 @@
-import { useState } from "react";
-import { FaCartPlus } from "react-icons/fa";
+// import { useState } from "react";
 import { MdFavorite } from "react-icons/md"
 import { Cart } from "../"
 const Navbar = () => {
-  const [cartOpen, setCartOpen] = useState(false);
+  // const [cartOpen, setCartOpen] = useState(false);
 
 
   return (
@@ -44,13 +43,13 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <ul className="list-none flex mx-4 text-xl">
-          <li className="hover:text-gray-800 mx-2 flex cursor-pointer" onClick={() => setCartOpen(!cartOpen)}>
-            {/* <a href="#" className="flex"> */}
+          {/* <li className="hover:text-gray-800 mx-2 flex cursor-pointer" onClick={() => setCartOpen(!cartOpen)}>
+            
               <FaCartPlus />
               <div className="rounded-full w-4 h-4 flex justify-center items-center text-sm relative bottom-1 right-1 font-semibold text-white bg-error p-1">7</div>
-            {/* </a> */}
+           
             {cartOpen ? <Cart /> : ""}
-          </li>
+          </li> */}<Cart />
           <li className="hover:text-gray-800 mx-2"><a href="#"><MdFavorite /></a></li>
         </ul>
         <a className="btn btn-sm">Login</a>

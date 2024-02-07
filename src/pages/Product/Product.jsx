@@ -11,7 +11,7 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1)
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center min-h-[79vh]">
       {/* LEFT */}
       <div className="flex gap-8">
         {/* images */}
@@ -27,7 +27,7 @@ const Product = () => {
           ))}
         </div>
         <div className="">
-          <img src={images[selectedImg]} alt="" className="my-4 w-96 h-96 object-cover" />
+          <img src={images[selectedImg]} alt="" className="my-4 w-96 h-96 object-cover mx-[-20px]" />
         </div>
 
       </div>

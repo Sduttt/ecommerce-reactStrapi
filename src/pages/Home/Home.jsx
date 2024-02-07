@@ -5,7 +5,7 @@ const Home = () => {
     <div>
       <div className="">
         <Slider />
-        <FeaturedProduct />
+        <FeaturedProduct type={"featured"} />
         <Categories />
       </div>
     </div>
