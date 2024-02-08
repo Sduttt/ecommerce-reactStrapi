@@ -5,7 +5,7 @@ const FeatureCard = ({item}) => {
     <div className="card w-[300px] mx-2 bg-cyan-100 shadow-xl">
       <figure className="w-[300px] h-[200px]"><img src={import.meta.env.VITE_REACT_APP_UPLOAD_URL+item?.attributes.img1.data.attributes.url} alt={item?.attributes.title} /></figure>
       <div className="card-body">
-        <h2 className="card-title">
+        <h2 className="card-title capitalize">
           {item?.attributes.title}
           <div className="badge badge-secondary">FEATURED</div>
         </h2>

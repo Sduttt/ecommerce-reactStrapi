@@ -1,6 +1,7 @@
 // import { useState } from "react";
 import { MdFavorite } from "react-icons/md"
 import { Cart } from "../"
+import { Link } from "react-router-dom"
 const Navbar = () => {
   // const [cartOpen, setCartOpen] = useState(false);
 
@@ -24,17 +25,22 @@ const Navbar = () => {
             <li><a>Item 3</a></li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <Link to='/' className="btn btn-ghost text-xl">Ecom</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-lg font-medium">
           <li><a>Item 1</a></li>
           <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
-                <li><a>Submenu 1</a></li>
-                <li><a>Submenu 2</a></li>
+            <details className="z-10">
+              <summary>Categories</summary>
+              <ul className="p-2 text-primary">
+                <li><Link to='/products/1'>Spiritual</Link></li>
+                <li><Link to='/products/2'>Classical</Link></li>
+                <li><Link to='/products/3'>Horror</Link></li>
+                <li><Link to='/products/4'>Thriller</Link></li>
+                <li><Link to='/products/5'>Non-Fiction</Link></li>
+                <li><Link to='/products/6'>Others</Link></li>
+                
               </ul>
             </details>
           </li>

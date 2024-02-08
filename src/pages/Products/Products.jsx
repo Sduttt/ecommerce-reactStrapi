@@ -1,13 +1,18 @@
 import { useParams } from "react-router-dom"
-import { Card } from "../../components"
+import { ListProducts } from "../../components"
 import useFetch from "../../hooks/useFetch"
+import { useState } from "react"
 
 const Products = () => {
   const catId = useParams().id
-  // console.log(catId)
 
-  const { data, loading, error } = useFetch(`/categories?[filters][id][$eq]=${catId}`)
+  const { data, loading, error } = useFetch(`categories?[filters][id][$eq]=${catId}`)
 
+  const [isUsed, setIsUsed] = useState("any")
+
+  const handleIsUsedChange = (event) => {
+    setIsUsed(event.target.value);
+  };
 
   return (
     <div className="flex justify-between gap-6 ">
@@ -16,22 +21,26 @@ const Products = () => {
         <div className="my-4">
           <h2 className="my-2 font-bold text-xl">Book Condition</h2>
           <div className="">
-            <input type="checkbox" name="New" id="new" value="new" />
+            <input type="radio" name="isUsed" id="any" value="any" defaultChecked onChange={handleIsUsedChange} />
+            <label className="ml-1 text-base" htmlFor="any">New/Old</label>
+          </div>
+          <div className="">
+            <input type="radio" name="isUsed" id="new" value="false" onChange={handleIsUsedChange} />
             <label className="ml-1 text-base" htmlFor="new">New</label>
           </div>
           <div className="">
-            <input type="checkbox" name="Old" id="old" value="old" />
+            <input type="radio" name="isUsed" id="old" value="true" onChange={handleIsUsedChange} />
             <label className="ml-1 text-base" htmlFor="old">Old</label>
           </div>
         </div>
-        <div className="my-4">
+        {/* <div className="my-4">
           <h2 className="my-2 font-bold text-xl">Filter by Price</h2>
           <div className="">
             <span>0</span>
             <input type="range" name="" id="" min={0} max={10000} />
             <span>10,000</span>
           </div>
-        </div>
+        </div> */}
         <div className="my-4">
           <h2 className="my-2 font-bold text-xl">Sort By</h2>
           <div className="">
@@ -51,11 +60,14 @@ const Products = () => {
       <div className="w-[82%]" >
         <div className="relative">
           <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="cover" className="w-[80vw] h-[40vh] object-cover" />
-          <h1 className="absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] text-accent text-3xl font-semibold capitalize">{error ? "" : (loading ? " " : data[0]?.attributes.title)}</h1>
+          <div className="absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%]">
+            <h1 className="text-accent text-3xl font-semibold capitalize">{error ? "Something went wrong" : (loading ? "Loading..." : data && data.data[0]?.attributes.title)}</h1>
+            <p className="">{error ? "Something went wrong" : (loading ? "Loading..." : data && data.data[0]?.attributes.description)}</p>
+          </div>
         </div>
-        <div className="my-2 flex flex-wrap">
-          <Card title="Sapiens" desc="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis architecto quia et!" pricex={399} price={349} img="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" />
-          <Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card />
+        <div className="">
+          <ListProducts isUsed={isUsed}/>
+
         </div>
       </div>
     </div>
