@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom"
 import useFetch from "../../hooks/useFetch"
 import Card from "../Card/Card"
 
-const ListProducts = ({ isUsed }) => {
+const ListProducts = ({ isUsed, sortMethod }) => {
   const catId = useParams().id
 
-  const { data, loading, error } = useFetch(`/products?populate=*&[filters][categories][id]=${catId}&${isUsed == "any" ? "" : isUsed == 'false' ? "[filters][isUsed][$eq]=false" : "[filters][isUsed][$eq]=true"}`)
+  const { data, loading, error } = useFetch(`/products?populate=*&[filters][categories][id]=${catId}&${isUsed == "any" ? "" : isUsed == 'false' ? "[filters][isUsed][$eq]=false" : "[filters][isUsed][$eq]=true"}${sortMethod === "ltoh" ? "&sort=price:asc" : sortMethod === "htol" ? "&sort=price:desc" : ""}`)
   const products = data?.data
 
   if (products?.length > 0) {

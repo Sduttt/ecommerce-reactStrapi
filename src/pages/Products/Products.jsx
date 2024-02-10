@@ -9,10 +9,15 @@ const Products = () => {
   const { data, loading, error } = useFetch(`categories?[filters][id][$eq]=${catId}`)
 
   const [isUsed, setIsUsed] = useState("any")
+  const [sortMethod, SetSortMethod] = useState(null) // ltoh, htol
 
   const handleIsUsedChange = (event) => {
     setIsUsed(event.target.value);
   };
+  const handleSortChange = (event) => {
+    SetSortMethod(event.target.value);
+  };
+
 
   return (
     <div className="flex justify-between gap-6 ">
@@ -45,11 +50,11 @@ const Products = () => {
           <h2 className="my-2 font-bold text-xl">Sort By</h2>
           <div className="">
             <div className="">
-              <input type="radio" name="sort" id="ltoh" value="ltoh" />
+              <input type="radio" name="sort" id="ltoh" value="ltoh" onChange={handleSortChange} />
               <label className="ml-1 text-base" htmlFor="ltoh">Price (Low to High)</label>
             </div>
             <div className="">
-              <input type="radio" name="sort" id="htol" value="htol" />
+              <input type="radio" name="sort" id="htol" value="htol" onChange={handleSortChange} />
               <label className="ml-1 text-base" htmlFor="htol">Price (High to Low)</label>
             </div>
           </div>
@@ -66,7 +71,7 @@ const Products = () => {
           </div>
         </div>
         <div className="">
-          <ListProducts isUsed={isUsed}/>
+          <ListProducts isUsed={isUsed} sortMethod={sortMethod} />
 
         </div>
       </div>
