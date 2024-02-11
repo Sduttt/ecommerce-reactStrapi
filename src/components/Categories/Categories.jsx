@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 const Categories = () => {
   return (
-    <div className="flex gap-1 h-[80vh] m-2">
+    <div id="cat" className="flex gap-1 h-[80vh] m-2">
       <div className="flex flex-col flex-2 gap-1">
         <div className="gap-1 fex  relative overflow-hidden">
           <img src="https://images.pexels.com/photos/904616/pexels-photo-904616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="category" className="w-[100%] h-[100%] object-cover" />

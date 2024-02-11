@@ -5,7 +5,6 @@ import { Link } from "react-router-dom"
 const Card = ({ product }) => {
 
     const percentageOff = ((product.attributes.mrp - product.attributes.price) / product.attributes.mrp) * 100;
-
     return (
         <Link to={`/product/${product.id}`} className="card w-56 bg-blue-200 shadow-xl m-2 relative overflow-hidden">
 
@@ -33,7 +32,7 @@ const Card = ({ product }) => {
                         <div className="font-semibold">{product?.attributes.price} Rs.</div>
                     </div>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
+                        <button className="btn btn-sm btn-primary">Order now</button>
                     </div>
                 </div>
             </div>

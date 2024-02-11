@@ -3,62 +3,28 @@ import { MdFavorite } from "react-icons/md"
 import { Cart } from "../"
 import { Link } from "react-router-dom"
 const Navbar = () => {
-  // const [cartOpen, setCartOpen] = useState(false);
-
-
   return (
     <div className="navbar bg-primary text-base-100">
       <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-          </div>
-          <ul tabIndex={0} className="text-gray-700 menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a>Item 1</a></li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li><a>Submenu 1</a></li>
-                <li><a>Submenu 2</a></li>
-              </ul>
-            </li>
-            <li><a>Item 3</a></li>
-          </ul>
-        </div>
         <Link to='/' className="btn btn-ghost text-xl">Ecom</Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-lg font-medium">
-          <li><a>Item 1</a></li>
-          <li>
-            <details className="z-10">
-              <summary>Categories</summary>
-              <ul className="p-2 text-primary">
-                <li><Link to='/products/1'>Spiritual</Link></li>
-                <li><Link to='/products/2'>Classical</Link></li>
-                <li><Link to='/products/3'>Horror</Link></li>
-                <li><Link to='/products/4'>Thriller</Link></li>
-                <li><Link to='/products/5'>Non-Fiction</Link></li>
-                <li><Link to='/products/6'>Others</Link></li>
-                
-              </ul>
-            </details>
-          </li>
-          <li><a>Item 3</a></li>
-        </ul>
-      </div>
-      <div className="navbar-end">
-        <ul className="list-none flex mx-4 text-xl">
-          {/* <li className="hover:text-gray-800 mx-2 flex cursor-pointer" onClick={() => setCartOpen(!cartOpen)}>
-            
-              <FaCartPlus />
-              <div className="rounded-full w-4 h-4 flex justify-center items-center text-sm relative bottom-1 right-1 font-semibold text-white bg-error p-1">7</div>
-           
-            {cartOpen ? <Cart /> : ""}
-          </li> */}<Cart />
-          <li className="hover:text-gray-800 mx-2"><a href="#"><MdFavorite /></a></li>
-        </ul>
+      <div className="navbar-end flex justify-end items-center space-x-4">
+        <div className="group inline-block relative z-10">
+          <a href="#cat" className="font-semibold py-2 px-4 rounded inline-flex items-center text-black btn btn-sm">
+            <span>Categories</span>
+          </a>
+          <ul className="absolute hidden text-primary pt-1 group-hover:block right-2">
+            <li className="py-1 px-4 bg-white hover:bg-gray-200 "><Link to='/products/1'>Spiritual</Link></li>
+            <li className="py-1 px-4 bg-white hover:bg-gray-200 "><Link to='/products/2'>Classical</Link></li>
+            <li className="py-1 px-4 bg-white hover:bg-gray-200 "><Link to='/products/3'>Horror</Link></li>
+            <li className="py-1 px-4 bg-white hover:bg-gray-200 "><Link to='/products/4'>Thriller</Link></li>
+            <li className="py-1 px-4 bg-white hover:bg-gray-200 "><Link to='/products/5'>Non-Fiction</Link></li>
+            <li className="py-1 px-4 bg-white hover:bg-gray-200 "><Link to='/products/6'>Others</Link></li>
+          </ul>
+        </div>
         <a className="btn btn-sm">Login</a>
+        <Cart />
+        <li className="hover:text-gray-800 mx-2"><a href="#"><MdFavorite /></a></li>
       </div>
     </div>
   )

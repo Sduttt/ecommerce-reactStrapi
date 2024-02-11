@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom"
 import useFetch from "../../hooks/useFetch"
 import { useDispatch } from "react-redux"
 import { addToCart } from "../../redux/cartReducer"
+import toast from 'react-hot-toast';
+import { Toaster } from "../../components"
 
 const Product = () => {
 
@@ -15,6 +17,8 @@ const Product = () => {
   const product = data && data.data[0]?.attributes;
 
   const percentageOff = ((product?.mrp - product?.price) / product?.mrp) * 100;
+
+  const notify = () => toast.success('Product added to the cart.');
 
   const images = [
     import.meta.env.VITE_REACT_APP_UPLOAD_URL + product?.img1.data.attributes.url,
@@ -91,18 +95,21 @@ const Product = () => {
             <button className="btn m-2" onClick={() => setQuantity(quantity + 1)}>+</button>
           </div>
           <div className="flex ">
-            <button className="btn btn-info mx-2" onClick={() => dispatch(addToCart({
-              id: productId,
-              title: product?.title,
-              price: product?.price,
-              quantity,
-              img: images[0]
-            
-            }))} >Add to Cart</button>
+            <button className="btn btn-info mx-2" onClick={() => {
+              dispatch(addToCart({
+                id: productId,
+                title: product?.title,
+                price: product?.price,
+                quantity,
+                img: images[0]
+
+              }));
+              notify();
+            }} >Add to Cart</button>
             <button className="btn btn-outline btn-info mx-2">Add to wishlist</button>
           </div>
         </div>
-
+        <Toaster />
       </div>
 
     )

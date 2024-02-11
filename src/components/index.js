@@ -6,6 +6,7 @@ import Categories from "./Categories/Categories";
 import Card from "./Card/Card";
 import Cart from "./Cart/Cart";
 import ListProducts from "./ListProducts/ListProducts";
+import ToastComponent from "./ToastComponent/ToastComponent";
 
 export {
     Navbar,
@@ -16,5 +17,6 @@ export {
     Card,
     Cart,
     ListProducts,
-
+    ToastComponent as Toaster,
+    
 }

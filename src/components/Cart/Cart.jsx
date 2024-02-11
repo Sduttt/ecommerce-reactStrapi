@@ -1,13 +1,17 @@
 import { FaCartPlus, FaTrash } from "react-icons/fa"
 import { useSelector } from "react-redux"
 import { useDispatch } from 'react-redux';
-import { addToCart, removeItem } from "../../redux/cartReducer";
+import { addToCart, removeItem, resetCart } from "../../redux/cartReducer";
+import toast from 'react-hot-toast';
 
 const Cart = () => {
 
     const products = useSelector(state => state.cart.products)
     const totalItems = products.reduce((total, product) => total + product.quantity, 0);
     const totalPrice = products.reduce((total, product) => total + product.price * product.quantity, 0);
+
+  const itemRemove = () => toast.success('Item removed successfully');
+  const cartReset = () => toast.success('Cart reset successful');
 
     const dispatch = useDispatch();
 
@@ -22,19 +26,19 @@ const Cart = () => {
 
     return (
         <>
-            <button className="btn flex px-2 py-1 text-3xl" onClick={() => document.getElementById('my_modal_5').showModal()}>
+            <button className=" flex px-2 py-1 text-3xl  hover:text-gray-200" onClick={() => document.getElementById('my_modal_5').showModal()}>
                 <FaCartPlus />
-                <div className="rounded-full w-4 h-4 flex justify-center items-center text-sm relative bottom-3 right-2 font-semibold text-white bg-error p-1">{totalItems}</div>
+                <div className="rounded-full w-4 h-4 flex justify-center items-center text-sm relative bottom-1 right-2 font-semibold text-white bg-error p-1">{totalItems}</div>
             </button>
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle text-black">
                 <div className="modal-box">
-                    <h3 className="font-bold text-lg">Cart Items</h3>
+                    <h3 className="font-bold text-lg">Cart</h3>
                     <div className="">
 
                         {
                             products.length === 0 ? (
                                 <div className="text-center">No items in cart</div>
-                                
+
                             ) :
                                 products.map((product, index) => (
                                     <div key={index} className="flex justify-between items-center py-2">
@@ -47,12 +51,23 @@ const Cart = () => {
                                         </div>
                                         <div className="flex items-center">
                                             <p className="font-bold mr-2">Rs{product.price * product.quantity}</p>
-                                            <button className="text-red-500" onClick={() => handleRemove(product.id)}>
+                                            <button className="text-red-500" onClick={() => {
+                                                handleRemove(product.id);
+                                                itemRemove();
+                                                }}>
                                                 <FaTrash />
                                             </button>
                                         </div>
                                     </div>
                                 ))
+
+                        }
+                        {
+                            products.length === 0 ? null :
+
+                                <div className="text-xl font-medium text-right">
+                                    Total: Rs {totalPrice}
+                                </div>
                         }
                         {/* {
                             products.map((product, index) => (
@@ -71,11 +86,12 @@ const Cart = () => {
                     </div>
                     {products.length === 0 ? null :
                         <div className="modal-action flex items-center justify-between">
-                            <div className="text-xl font-medium">
-                                Total: Rs {totalPrice}
-                            </div>
+                            <button className="btn" onClick={() => {
+                                dispatch(resetCart());
+                                cartReset();
+                                }}>Reset</button>
                             <form method="dialog">
-                                <button className="btn">Checkout</button>
+                                <button className="btn btn-success">Checkout</button>
                             </form>
                         </div>}
                 </div>
