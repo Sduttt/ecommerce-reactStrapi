@@ -21,9 +21,9 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 const Layout = () => {
   return (
-    <div className="app">
+    <div className="app flex flex-col min-h-screen">
       <Navbar />
-      <Outlet />
+      <Outlet className="flex-grow" />
       <Footer />
     </div>
   )

@@ -20,22 +20,22 @@ const Products = () => {
 
 
   return (
-    <div className="flex justify-between gap-6 ">
+    <div className="flex justify-between gap-6">
       {/* LEFT */}
-      <div className="ml-4 sticky top-4 h-[100%]">
+      <div className="md:ml-4 ml-2 sticky top-4 h-[100%]">
         <div className="my-4">
-          <h2 className="my-2 font-bold text-xl">Book Condition</h2>
+          <h2 className="my-2 font-bold text-md md:text-xl">Book Condition</h2>
           <div className="">
             <input type="radio" name="isUsed" id="any" value="any" defaultChecked onChange={handleIsUsedChange} />
-            <label className="ml-1 text-base" htmlFor="any">New/Old</label>
+            <label className="ml-1 text-sm md:text-base" htmlFor="any">New/Old</label>
           </div>
           <div className="">
             <input type="radio" name="isUsed" id="new" value="false" onChange={handleIsUsedChange} />
-            <label className="ml-1 text-base" htmlFor="new">New</label>
+            <label className="ml-1 text-sm md:text-base" htmlFor="new">New</label>
           </div>
           <div className="">
             <input type="radio" name="isUsed" id="old" value="true" onChange={handleIsUsedChange} />
-            <label className="ml-1 text-base" htmlFor="old">Old</label>
+            <label className="ml-1 text-sm md:text-base" htmlFor="old">Old</label>
           </div>
         </div>
         {/* <div className="my-4">
@@ -47,22 +47,22 @@ const Products = () => {
           </div>
         </div> */}
         <div className="my-4">
-          <h2 className="my-2 font-bold text-xl">Sort By</h2>
+          <h2 className="my-2 font-bold text-md md:text-xl">Sort By</h2>
           <div className="">
             <div className="">
               <input type="radio" name="sort" id="ltoh" value="ltoh" onChange={handleSortChange} />
-              <label className="ml-1 text-base" htmlFor="ltoh">Price (Low to High)</label>
+              <label className="ml-1 text-sm md:text-base" htmlFor="ltoh">Price (Low to High)</label>
             </div>
             <div className="">
               <input type="radio" name="sort" id="htol" value="htol" onChange={handleSortChange} />
-              <label className="ml-1 text-base" htmlFor="htol">Price (High to Low)</label>
+              <label className="ml-1 text-sm md:text-base" htmlFor="htol">Price (High to Low)</label>
             </div>
           </div>
         </div>
       </div>
 
       {/* RIGHT */}
-      <div className="w-[82%]" >
+      <div className="w-[82%] bg-slate-200" >
         <div className="relative">
           <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="cover" className="w-[80vw] h-[40vh] object-cover" />
           <div className="absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%]">

@@ -55,43 +55,43 @@ const Product = () => {
     )
   } else {
     return (
-      <div className="flex items-center min-h-[79vh]">
+      <div className="flex flex-col md:flex-row items-center my-2 ml-[-50px] md:ml-2 md:min-h-[79vh]">
         {/* LEFT */}
-        <div className="flex gap-8">
+        <div className="flex md:gap-8 bg-slate-200">
           {/* images */}
-          <div className="glass">
+          <div>
             {images.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 alt="product"
-                className="w-20 h-20 object-cover cursor-pointer hover:opacity-50 transition duration-300 ease-in-out m-4"
+                className="w-16 h-16 object-cover cursor-pointer hover:opacity-50 transition duration-300 ease-in-out my-4 mr-8 md:m-4 border-spacing-2 border-black"
                 onClick={() => setSelectedImg(index)}
               />
             ))}
           </div>
           <div className="">
-            <img src={images[selectedImg]} alt="" className="my-4 w-96 h-96 object-cover mx-[-20px]" />
+            <img src={images[selectedImg]} alt="" className="my-4 w-64 h-64 md:w-96 md:h-96 object-cover mx-[-20px]" />
           </div>
         </div>
 
         {/* RIGHT */}
-        <div className="max-w-[500px] m-4 ml-24">
-          <h1 className="text-xl font-semibold capitalize ">{product?.title}
+        <div className="max-w-[90vw] md:max-w-[500px] m-4 ml-16 md:ml-24 text-xs">
+          <h1 className="text-md sm:text-2xl font-semibold capitalize ">{product?.title}
 
-            {product?.type === "featured," ? <span className="badge badge-warning text-white mx-4">Featured</span> : ""}
+            {product?.type === "featured," ? <span className="badge badge-sm md:badge-md badge-warning text-white mx-4">Featured</span> : ""}
           </h1>
 
-          <p className="text-gray-700 text-sm font-bold">Language: <span className="font-normal capitalize"> {languageName} </span></p>
-          <p className="text-gray-700 text-sm font-bold">Category: <span className="font-normal capitalize"> {product?.categories.data?.map(category => category.attributes.title).join(', ')} </span></p>
-          <p className="text-gray-700 text-sm font-bold">Book Condition: <span className="font-normal capitalize"> {product?.isUsed ? "Used" : "New"} </span></p>
-          <p className="text-lg my-4">{product?.description}</p>
-          <p className="line-through font-medium text-gray-500">Rs. {product?.mrp}</p>
-          <p className="font-semibold text-bg">Rs. {product?.price}<span className="text-green-500 ml-2">{percentageOff.toFixed(2)}% off</span></p>
+          <p className="text-gray-700 md:text-base font-bold">Language: <span className="font-normal capitalize"> {languageName} </span></p>
+          <p className="text-gray-700 md:text-base font-bold">Category: <span className="font-normal capitalize"> {product?.categories.data?.map(category => category.attributes.title).join(', ')} </span></p>
+          <p className="text-gray-700 md:text-base font-bold">Book Condition: <span className="font-normal capitalize"> {product?.isUsed ? "Used" : "New"} </span></p>
+          <p className="md:text-lg my-4">{product?.description}</p>
+          <p className="line-through font-medium sm:text-sm text-gray-500">Rs. {product?.mrp}</p>
+          <p className="font-semibold text-md sm:text-xl">Rs. {product?.price}<span className="text-green-500 ml-2">{percentageOff.toFixed(2)}% off</span></p>
           <div className="flex items-center">
-            <h2 className="font-semibold text-bg">Quantity:  </h2>
-            <button className={`btn m-2 ${quantity <= 1 ? "btn-disabled" : ""}`} onClick={() => setQuantity((prev) => (prev === 1 ? 1 : prev - 1))}>-</button>
-            <span className="font-semibold text-bg">{quantity}</span>
+            <h2 className="font-semibold sm:text-base">Quantity:  </h2>
+            <button className={`btn  m-2 ${quantity <= 1 ? "btn-disabled" : ""}`} onClick={() => setQuantity((prev) => (prev === 1 ? 1 : prev - 1))}>-</button>
+            <span className="font-semibold sm:text-base">{quantity}</span>
             <button className="btn m-2" onClick={() => setQuantity(quantity + 1)}>+</button>
           </div>
           <div className="flex ">

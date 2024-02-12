@@ -6,6 +6,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      'sm': '450px',
+
+      'md': '770px',
+
+    },
     extend: {},
   },
   variants: {
