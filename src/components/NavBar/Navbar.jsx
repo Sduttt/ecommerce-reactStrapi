@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-primary text-base-100">
       <div className="navbar-start">
-        <Link to='/' className="btn btn-ghost text-xl">Ecom</Link>
+        <Link to='/' className="btn btn-ghost text-xl">Books&Emotions</Link>
       </div>
       <div className="navbar-end flex justify-end items-center space-x-4">
         <div className="group inline-block relative z-10">
@@ -21,7 +21,7 @@ const Navbar = () => {
             <li className="py-1 px-4 bg-white hover:bg-gray-200 "><Link to='/products/6'>Others</Link></li>
           </ul>
         </div>
-        <a className="btn btn-sm">Login</a>
+        {/* <a className="btn btn-sm">Login</a> */}
         <Cart />
         {/* <li className="hover:text-gray-800 mx-2"><a href="#"><MdFavorite /></a></li> */}
       </div>

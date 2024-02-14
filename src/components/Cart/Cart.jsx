@@ -3,6 +3,8 @@ import { useSelector } from "react-redux"
 import { useDispatch } from 'react-redux';
 import { addToCart, removeItem, resetCart } from "../../redux/cartReducer";
 import toast from 'react-hot-toast';
+import { loadStripe } from '@stripe/stripe-js';
+import { makeRequest } from "../../makeRequest";
 
 const Cart = () => {
 
@@ -10,20 +12,36 @@ const Cart = () => {
     const totalItems = products.reduce((total, product) => total + product.quantity, 0);
     const totalPrice = products.reduce((total, product) => total + product.price * product.quantity, 0);
 
-  const itemRemove = () => toast.success('Item removed successfully');
-  const cartReset = () => toast.success('Cart reset successful');
+    const itemRemove = () => toast.success('Item removed successfully');
+    const cartReset = () => toast.success('Cart reset successful');
 
     const dispatch = useDispatch();
+
+    const stripePromise = loadStripe(import.meta.env.VITE_REACT_STRIPE_PUBLIC_KEY);
 
     const handleRemove = (id) => {
         const product = products.find(product => product.id === id);
         if (product.quantity > 1) {
-            dispatch(addToCart({ ...product, quantity: -1 }));
+            dispatch(addToCart({ ...product, quantity: product.quantity - 1 }));
         } else {
             dispatch(removeItem(id));
         }
     };
 
+    const handleCheckout = async () => {
+        try {
+            const stripe = await stripePromise;
+            const res = await makeRequest.post("/orders", {
+                products,
+            });
+            await stripe.redirectToCheckout({
+                sessionId: res.data.id,
+            });
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
     return (
         <>
             <button className=" flex px-2 py-1 text-3xl  hover:text-gray-200" onClick={() => document.getElementById('my_modal_5').showModal()}>
@@ -45,7 +63,7 @@ const Cart = () => {
                                         <div className="flex items-center">
                                             <img src={product.img} alt="product" className="w-16 h-16" />
                                             <div className="ml-2">
-                                                <p className="font-bold">{product.title}</p>
+                                                <p className="font-bold capitalize">{product.title}</p>
                                                 <p className="text-sm">Quantity: {product.quantity}</p>
                                             </div>
                                         </div>
@@ -54,7 +72,7 @@ const Cart = () => {
                                             <button className="text-red-500" onClick={() => {
                                                 handleRemove(product.id);
                                                 itemRemove();
-                                                }}>
+                                            }}>
                                                 <FaTrash />
                                             </button>
                                         </div>
@@ -89,9 +107,9 @@ const Cart = () => {
                             <button className="btn" onClick={() => {
                                 dispatch(resetCart());
                                 cartReset();
-                                }}>Reset</button>
+                            }}>Reset</button>
                             <form method="dialog">
-                                <button className="btn btn-success">Checkout</button>
+                                <button onClick={handleCheckout} className="btn btn-success">Checkout</button>
                             </form>
                         </div>}
                 </div>
